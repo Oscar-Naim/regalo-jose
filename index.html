@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <title>Canciones para ti ♡ — Un regalo con amor</title>
+  <meta name="description" content="Un regalo digital personalizado con estilo coquette vintage, canciones especiales, carta de amor, nota de voz y flores interactivas." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+
+  <!-- Tipografías editoriales y caligráficas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body class="envelope-locked">
+  <!-- Textura sutil de papel de algodón -->
+  <div class="paper-grain" aria-hidden="true"></div>
+
+  <!-- Lienzo de pétalos flotantes -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- =====================================================================
+       1. PANTALLA DE INICIO: CARTA CERRADA CON FLORES Y SELLO "Toca para abrir"
+       ===================================================================== -->
+  <section id="envelope-screen" class="envelope-screen" aria-label="Carta de regalo cerrada">
+    <!-- Esquinas de encaje decorativo -->
+    <svg class="splash-corner splash-corner--tl" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path d="M8 112V28C8 16.954 16.954 8 28 8H112" stroke="#C97389" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <path d="M16 92V32C16 23.163 23.163 16 32 16H92" stroke="#E59BB0" stroke-width="1"/>
+      <circle cx="26" cy="26" r="5" fill="#E59BB0" fill-opacity="0.45"/>
+      <path d="M26 14C29 20 32 23 38 26C32 29 29 32 26 38C23 32 20 29 14 26C20 23 23 20 26 14Z" fill="#C97389" fill-opacity="0.5"/>
+    </svg>
+    <svg class="splash-corner splash-corner--tr" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path d="M8 112V28C8 16.954 16.954 8 28 8H112" stroke="#C97389" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <path d="M16 92V32C16 23.163 23.163 16 32 16H92" stroke="#E59BB0" stroke-width="1"/>
+      <path d="M26 14C29 20 32 23 38 26C32 29 29 32 26 38C23 32 20 29 14 26C20 23 23 20 26 14Z" fill="#C97389" fill-opacity="0.5"/>
+    </svg>
+    <svg class="splash-corner splash-corner--bl" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path d="M8 112V28C8 16.954 16.954 8 28 8H112" stroke="#C97389" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <path d="M16 92V32C16 23.163 23.163 16 32 16H92" stroke="#E59BB0" stroke-width="1"/>
+    </svg>
+    <svg class="splash-corner splash-corner--br" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path d="M8 112V28C8 16.954 16.954 8 28 8H112" stroke="#C97389" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <path d="M16 92V32C16 23.163 23.163 16 32 16H92" stroke="#E59BB0" stroke-width="1"/>
+    </svg>
+
+    <p class="splash-pretitle" id="splash-for-label">Un pequeño detalle hecho con todo mi corazón para ti ♡</p>
+
+    <!-- Sobre interactivo en 3D -->
+    <div id="envelope-stage" class="envelope-stage" role="button" tabindex="0" aria-label="Toca para abrir tu regalo">
+      <div class="envelope-wrapper">
+        <!-- Interior del sobre -->
+        <div class="envelope-back">
+          <div class="envelope-liner-pattern"></div>
+        </div>
+
+        <!-- Tarjeta interior que se eleva al abrir -->
+        <div class="envelope-letter-card">
+          <img src="assets/floral-sprig.jpg" alt="" class="envelope-letter-card__sprig" />
+          <div class="envelope-letter-card__title">Canciones para ti</div>
+          <div class="envelope-letter-card__sub" id="envelope-card-from">Con todo mi amor ♡</div>
+        </div>
+
+        <!-- Pliegues del sobre -->
+        <div class="envelope-pocket">
+          <svg class="envelope-pocket-svg" viewBox="0 0 470 322" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="envLeftGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FDF7F2"/>
+                <stop offset="100%" stop-color="#F5E4E6"/>
+              </linearGradient>
+              <linearGradient id="envRightGrad" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FCF4EE"/>
+                <stop offset="100%" stop-color="#F2DEE2"/>
+              </linearGradient>
+              <linearGradient id="envBottomGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="#FFFDF9"/>
+                <stop offset="100%" stop-color="#F6E6E9"/>
+              </linearGradient>
+            </defs>
+            <polygon points="0,0 235,172 0,322" fill="url(#envLeftGrad)" stroke="#E3BDC6" stroke-width="1"/>
+            <polygon points="470,0 235,172 470,322" fill="url(#envRightGrad)" stroke="#E3BDC6" stroke-width="1"/>
+            <path d="M0,322 L212,158 Q235,142 258,158 L470,322 Z" fill="url(#envBottomGrad)" stroke="#DFB4BF" stroke-width="1.2"/>
+            <path d="M18,314 L218,166 Q235,154 252,166 L452,314" fill="none" stroke="#D99AAA" stroke-width="0.9" stroke-dasharray="4 3"/>
+          </svg>
+        </div>
+
+        <!-- Guirnalda floral decorando el sobre -->
+        <img src="assets/floral-sprig.jpg" alt="Flores decorativas" class="envelope-floral-decor" />
+
+        <!-- Solapa superior plegable en 3D -->
+        <div class="envelope-flap" id="envelope-flap">
+          <svg class="envelope-flap-svg" viewBox="0 0 470 190" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="envFlapGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="#FFFDF9"/>
+                <stop offset="65%" stop-color="#FAF0EB"/>
+                <stop offset="100%" stop-color="#F3DCE1"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,0 L470,0 L258,168 Q235,186 212,168 Z" fill="url(#envFlapGrad)" stroke="#DFB4BF" stroke-width="1.2"/>
+            <path d="M18,6 L218,158 Q235,171 252,158 L452,6" fill="none" stroke="#D99AAA" stroke-width="0.9" stroke-dasharray="4 3"/>
+          </svg>
+        </div>
+
+        <!-- Sello de cera en relieve con "Toca para abrir" -->
+        <button type="button" id="wax-seal-btn" class="wax-seal-btn" aria-label="Toca para abrir">
+          <span class="wax-seal-disc">
+            <!-- Emblema de lazo coquette y corazón -->
+            <svg class="wax-seal-emblem" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M24 37C24 37 11 28.5 11 19.2C11 14.8 14.5 11.5 18.6 11.5C21.2 11.5 23.1 12.9 24 14.7C24.9 12.9 26.8 11.5 29.4 11.5C33.5 11.5 37 14.8 37 19.2C37 28.5 24 37 24 37Z" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity="0.18"/>
+              <path d="M24 22C20.5 18.5 15.5 18.2 15.5 21.8C15.5 25.2 20.5 24.5 24 22ZM24 22C27.5 18.5 32.5 18.2 32.5 21.8C32.5 25.2 27.5 24.5 24 22Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M23 22.8L19.5 30M25 22.8L28.5 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="22" r="1.8" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="wax-seal-label">Toca para abrir</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="splash-caption">Sellado con lacre de rosa • Activa el sonido para la experiencia completa ♪</p>
+  </section>
+
+  <!-- =====================================================================
+       BARRA DE NAVEGACIÓN
+       ===================================================================== -->
+  <nav class="top-ribbon-nav" aria-label="Secciones del regalo">
+    <div class="top-ribbon-nav__inner">
+      <button type="button" id="replay-envelope-btn" class="nav-pill nav-pill--icon" title="Cerrar y volver a abrir el sobre">
+        ✉ Sobre
+      </button>
+      <a href="#cassette-section" class="nav-pill">♪ Casete</a>
+      <a href="#tracklist-section" class="nav-pill">♡ Canciones</a>
+      <a href="#liner-note-section" class="nav-pill">✎ Carta</a>
+      <a href="#surprises-section" class="nav-pill">✿ Sorpresas</a>
+      <button type="button" id="mute-toggle-btn" class="nav-pill nav-pill--icon" aria-label="Activar o desactivar sonido">
+        🔊 Con sonido
+      </button>
+    </div>
+  </nav>
+
+  <!-- =====================================================================
+       CONTENIDO PRINCIPAL DEL REGALO
+       ===================================================================== -->
+  <main id="gift-main" class="gift-main">
+
+    <!-- ===================================================================
+         2. DISEÑO DEL REPRODUCTOR: "Canciones para ti" & CASETE FLORAL
+         =================================================================== -->
+    <section id="cassette-section" class="hero-player-section">
+      <img src="assets/floral-sprig.jpg" alt="" class="hero-sprig" />
+      <div class="hero-badge">✦ Mixtape Coquette Vintage • Lado A ✦</div>
+      <h1 class="hero-title" id="gift-main-title">Canciones para ti</h1>
+      <p class="hero-subtitle" id="gift-main-subtitle">
+        Cada melodía de esta cinta guarda un momento contigo — dale play y quédate conmigo.
+      </p>
+
+      <div class="cassette-deck-card">
+        <!-- Ilustración interactiva del casete vintage -->
+        <div id="cassette-artwork-wrap" class="cassette-artwork-wrap">
+          <svg id="cassette-svg" class="cassette-svg" viewBox="0 0 600 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Casete vintage coquette decorado con flores y lazos">
+            <defs>
+              <linearGradient id="shellGrad" x1="40" y1="30" x2="560" y2="360" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FADCE3"/>
+                <stop offset="50%" stop-color="#F2C0CC"/>
+                <stop offset="100%" stop-color="#E4A4B4"/>
+              </linearGradient>
+              <linearGradient id="shellRimGrad" x1="300" y1="30" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFF7F9"/>
+                <stop offset="100%" stop-color="#CE8698"/>
+              </linearGradient>
+              <linearGradient id="stickerGrad" x1="72" y1="56" x2="528" y2="278" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFDF9"/>
+                <stop offset="100%" stop-color="#FAF0E8"/>
+              </linearGradient>
+              <pattern id="cassetteGingham" width="18" height="18" patternUnits="userSpaceOnUse">
+                <rect width="18" height="18" fill="#FFFDF9"/>
+                <rect width="9" height="18" fill="#F2BAC8" fill-opacity="0.38"/>
+                <rect width="18" height="9" fill="#F2BAC8" fill-opacity="0.38"/>
+              </pattern>
+              <linearGradient id="bowSilkGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FCE4EA"/>
+                <stop offset="48%" stop-color="#EFAEC0"/>
+                <stop offset="100%" stop-color="#D17B92"/>
+              </linearGradient>
+              <linearGradient id="windowGrad" x1="156" y1="134" x2="444" y2="240" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4A2C32"/>
+                <stop offset="50%" stop-color="#382025"/>
+                <stop offset="100%" stop-color="#4E2F36"/>
+              </linearGradient>
+              <clipPath id="stickerClip">
+                <rect x="74" y="58" width="452" height="218" rx="16"/>
+              </clipPath>
+              <clipPath id="tapeWindowClip">
+                <rect x="158" y="136" width="284" height="102" rx="51"/>
+              </clipPath>
+            </defs>
+
+            <!-- Cuerpo exterior del casete -->
+            <rect x="40" y="30" width="520" height="328" rx="26" fill="url(#shellGrad)" stroke="url(#shellRimGrad)" stroke-width="3"/>
+            <rect x="52" y="42" width="496" height="304" rx="20" stroke="#FFF6F8" stroke-opacity="0.7" stroke-width="1.5"/>
+
+            <rect x="37" y="112" width="5" height="64" rx="2.5" fill="#D58E9F"/>
+            <rect x="558" y="112" width="5" height="64" rx="2.5" fill="#D58E9F"/>
+
+            <!-- Etiqueta de papel crema con estampado floral y cuadros -->
+            <g clip-path="url(#stickerClip)">
+              <rect x="74" y="58" width="452" height="218" rx="16" fill="url(#stickerGrad)"/>
+              <rect x="74" y="58" width="452" height="36" fill="url(#cassetteGingham)"/>
+              <rect x="74" y="250" width="452" height="26" fill="url(#cassetteGingham)"/>
+              <line x1="74" y1="94" x2="526" y2="94" stroke="#DDA3B2" stroke-width="1.2"/>
+              <line x1="74" y1="250" x2="526" y2="250" stroke="#DDA3B2" stroke-width="1"/>
+              <line x1="112" y1="122" x2="488" y2="122" stroke="#E8C5CE" stroke-width="1" stroke-dasharray="3 3"/>
+
+              <!-- Motivos florales en la etiqueta -->
+              <g transform="translate(92, 165)">
+                <path d="M12 48 C4 26, 8 -8, 26 -28" stroke="#859B82" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 22 C-4 16, -8 4, 2 0 C10 4, 12 14, 10 22 Z" fill="#A5B8A0"/>
+                <path d="M14 4 C26 -2, 30 -12, 20 -16 C12 -12, 12 -2, 14 4 Z" fill="#8FA68B"/>
+                <circle cx="26" cy="-30" r="11" fill="#EEB3C2"/>
+                <path d="M20 -34 C24 -40, 32 -38, 32 -29 C32 -22, 21 -22, 20 -30 Z" fill="#D67F95"/>
+                <circle cx="26" cy="-30" r="4" fill="#FCE8ED"/>
+                <g transform="translate(4, -12)">
+                  <circle cx="0" cy="-5" r="3.5" fill="#B8CBE0"/>
+                  <circle cx="5" cy="-1" r="3.5" fill="#B8CBE0"/>
+                  <circle cx="3" cy="5" r="3.5" fill="#B8CBE0"/>
+                  <circle cx="-3" cy="5" r="3.5" fill="#B8CBE0"/>
+                  <circle cx="-5" cy="-1" r="3.5" fill="#B8CBE0"/>
+                  <circle cx="0" cy="0" r="2.2" fill="#F2D184"/>
+                </g>
+              </g>
+
+              <g transform="translate(508, 165) scale(-1, 1)">
+                <path d="M12 48 C4 26, 8 -8, 26 -28" stroke="#859B82" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 22 C-4 16, -8 4, 2 0 C10 4, 12 14, 10 22 Z" fill="#A5B8A0"/>
+                <path d="M14 4 C26 -2, 30 -12, 20 -16 C12 -12, 12 -2, 14 4 Z" fill="#8FA68B"/>
+                <circle cx="26" cy="-30" r="11" fill="#EEB3C2"/>
+                <path d="M20 -34 C24 -40, 32 -38, 32 -29 C32 -22, 21 -22, 20 -30 Z" fill="#D67F95"/>
+                <circle cx="26" cy="-30" r="4" fill="#FCE8ED"/>
+                <g transform="translate(4, -12)">
+                  <circle cx="0" cy="-5" r="3.5" fill="#FADCE4"/>
+                  <circle cx="5" cy="-1" r="3.5" fill="#FADCE4"/>
+                  <circle cx="3" cy="5" r="3.5" fill="#FADCE4"/>
+                  <circle cx="-3" cy="5" r="3.5" fill="#FADCE4"/>
+                  <circle cx="-5" cy="-1" r="3.5" fill="#FADCE4"/>
+                  <circle cx="0" cy="0" r="2.2" fill="#E8B968"/>
+                </g>
+              </g>
+            </g>
+            <rect x="74" y="58" width="452" height="218" rx="16" stroke="#D998A8" stroke-width="1.5"/>
+
+            <!-- Placa LADO A y subtítulo -->
+            <rect x="92" y="66" width="58" height="20" rx="6" fill="#9F3E56"/>
+            <text x="121" y="80" text-anchor="middle" fill="#FFFDF9" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" letter-spacing="1.2">LADO A</text>
+
+            <text id="cassette-mixtape-sub" x="300" y="81" text-anchor="middle" fill="#7D293E" font-family="'Cormorant Garamond', Georgia, serif" font-style="italic" font-weight="700" font-size="18">
+              Canciones para ti ♡
+            </text>
+
+            <text x="486" y="80" text-anchor="end" fill="#9E6D78" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.8">
+              60 MIN • ESTÉREO
+            </text>
+
+            <!-- Título dinámico de la pista en manuscrito -->
+            <text id="cassette-track-label" x="300" y="116" text-anchor="middle" fill="#3B2529" font-family="'Caveat', cursive" font-size="23" font-weight="600">
+              01. INAROW62. — Álvaro Díaz
+            </text>
+
+            <!-- Ventana central transparente -->
+            <rect x="156" y="134" width="288" height="106" rx="53" fill="url(#windowGrad)" stroke="#C98294" stroke-width="3"/>
+
+            <g clip-path="url(#tapeWindowClip)">
+              <rect x="242" y="146" width="116" height="82" rx="8" fill="#2A161A" stroke="#6E4650" stroke-width="1"/>
+
+              <!-- Carretes de cinta magnética dinámicos -->
+              <circle id="tape-pack-left" cx="216" cy="187" r="42" fill="#241215" stroke="#5B3740" stroke-width="1.5"/>
+              <circle id="tape-pack-right" cx="384" cy="187" r="24" fill="#241215" stroke="#5B3740" stroke-width="1.5"/>
+
+              <line x1="264" y1="187" x2="336" y2="187" stroke="#A67B85" stroke-width="1" stroke-opacity="0.55"/>
+              <text x="270" y="181" fill="#D5B2BA" font-family="sans-serif" font-size="7.5" opacity="0.8">100</text>
+              <text x="296" y="181" fill="#D5B2BA" font-family="sans-serif" font-size="7.5" opacity="0.8">50</text>
+              <text x="326" y="181" fill="#D5B2BA" font-family="sans-serif" font-size="7.5" opacity="0.8">0</text>
+
+              <!-- Engranaje izquierdo que gira -->
+              <g class="cassette-reel-spin">
+                <circle cx="216" cy="187" r="23" fill="#FFFDF9" stroke="#D9A1AF" stroke-width="2"/>
+                <circle cx="216" cy="187" r="15" fill="#3B2328"/>
+                <rect x="214" y="169" width="4" height="6" rx="1" fill="#FFFDF9"/>
+                <rect x="214" y="199" width="4" height="6" rx="1" fill="#FFFDF9"/>
+                <rect x="214" y="169" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(60 216 187)"/>
+                <rect x="214" y="199" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(60 216 187)"/>
+                <rect x="214" y="169" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(120 216 187)"/>
+                <rect x="214" y="199" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(120 216 187)"/>
+              </g>
+
+              <!-- Engranaje derecho que gira -->
+              <g class="cassette-reel-spin">
+                <circle cx="384" cy="187" r="23" fill="#FFFDF9" stroke="#D9A1AF" stroke-width="2"/>
+                <circle cx="384" cy="187" r="15" fill="#3B2328"/>
+                <rect x="382" y="169" width="4" height="6" rx="1" fill="#FFFDF9"/>
+                <rect x="382" y="199" width="4" height="6" rx="1" fill="#FFFDF9"/>
+                <rect x="382" y="169" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(60 384 187)"/>
+                <rect x="382" y="199" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(60 384 187)"/>
+                <rect x="382" y="169" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(120 384 187)"/>
+                <rect x="382" y="199" width="4" height="6" rx="1" fill="#FFFDF9" transform="rotate(120 384 187)"/>
+              </g>
+
+              <polygon points="255,134 282,134 245,240 218,240" fill="#FFFFFF" fill-opacity="0.07"/>
+            </g>
+
+            <text x="300" y="267" text-anchor="middle" fill="#8B485A" font-family="'Cormorant Garamond', Georgia, serif" font-style="italic" font-size="13.5" font-weight="600">
+              ✦ Grabado en cinta de seda rosa • Tratar con cariño ✦
+            </text>
+
+            <!-- Cabezal trapezoidal inferior -->
+            <path d="M142 358 L166 294 C168 289 173 286 179 286 H421 C427 286 432 289 434 294 L458 358 Z" fill="#EBB4C1" stroke="#CF8899" stroke-width="2"/>
+            <circle cx="204" cy="330" r="9.5" fill="#46282E" stroke="#FFF4F6" stroke-width="1.5"/>
+            <circle cx="396" cy="330" r="9.5" fill="#46282E" stroke="#FFF4F6" stroke-width="1.5"/>
+            <circle cx="248" cy="338" r="6.5" fill="#46282E" stroke="#FFF4F6" stroke-width="1.2"/>
+            <circle cx="352" cy="338" r="6.5" fill="#46282E" stroke="#FFF4F6" stroke-width="1.2"/>
+
+            <!-- Tornillos vintage de bronce -->
+            <g fill="#D5B28A" stroke="#9B7850" stroke-width="1.2">
+              <circle cx="60" cy="50" r="5.5"/><line x1="57" y1="50" x2="63" y2="50" stroke="#7A5B38"/>
+              <circle cx="540" cy="50" r="5.5"/><line x1="537" y1="50" x2="543" y2="50" stroke="#7A5B38"/>
+              <circle cx="60" cy="338" r="5.5"/><line x1="57" y1="338" x2="63" y2="338" stroke="#7A5B38"/>
+              <circle cx="540" cy="338" r="5.5"/><line x1="537" y1="338" x2="543" y2="338" stroke="#7A5B38"/>
+              <circle cx="300" cy="304" r="5"/><line x1="297" y1="304" x2="303" y2="304" stroke="#7A5B38"/>
+            </g>
+
+            <!-- Lazos de satén coquette decorando el casete -->
+            <g transform="translate(74, 44) rotate(-15)">
+              <path d="M-4 6 C-12 24, -26 42, -34 58 L-22 54 L-16 63 C-8 45, 0 24, 2 8 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.3"/>
+              <path d="M4 6 C14 24, 26 40, 36 55 L24 52 L19 61 C10 44, 2 24, -2 8 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.3"/>
+              <path d="M0 0 C-18 -20, -48 -18, -46 4 C-44 22, -16 16, 0 4 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.4"/>
+              <path d="M0 0 C18 -20, 48 -18, 46 4 C44 22, 16 16, 0 4 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.4"/>
+              <path d="M-8 1 C-20 -4, -30 -3, -34 3" stroke="#BC6B82" stroke-width="1" stroke-linecap="round"/>
+              <path d="M8 1 C20 -4, 30 -3, 34 3" stroke="#BC6B82" stroke-width="1" stroke-linecap="round"/>
+              <rect x="-7" y="-6" width="14" height="13" rx="5" fill="#F6C8D4" stroke="#B6637B" stroke-width="1.4"/>
+            </g>
+
+            <g transform="translate(528, 276) rotate(14) scale(0.76)">
+              <path d="M-4 6 C-12 24, -24 40, -30 54 L-19 50 L-14 58 C-7 42, 0 24, 2 8 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.4"/>
+              <path d="M4 6 C12 24, 24 40, 32 54 L21 50 L16 58 C8 42, 2 24, -2 8 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.4"/>
+              <path d="M0 0 C-18 -20, -46 -16, -44 4 C-42 20, -16 16, 0 4 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.5"/>
+              <path d="M0 0 C18 -20, 46 -16, 44 4 C42 20, 16 16, 0 4 Z" fill="url(#bowSilkGrad)" stroke="#BC6B82" stroke-width="1.5"/>
+              <rect x="-7" y="-6" width="14" height="13" rx="5" fill="#F6C8D4" stroke="#B6637B" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Frase o susurro romántico de la canción -->
+        <div class="lyric-whisper-bar" aria-live="polite">
+          <span class="lyric-whisper-note">♪</span>
+          <span id="lyric-whisper-text">“Tú me tienes pensando en ti todo el día…”</span>
+        </div>
+
+        <!-- Controles interactivos del reproductor -->
+        <div class="player-controls-panel">
+          <div class="progress-row">
+            <span id="time-current" class="time-label">0:00</span>
+            <div id="progress-track" class="progress-track" role="slider" tabindex="0" aria-label="Avanzar canción" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div id="progress-fill" class="progress-fill">
+                <span class="progress-thumb"></span>
+              </div>
+            </div>
+            <span id="time-total" class="time-label">3:12</span>
+          </div>
+
+          <div class="transport-buttons-row">
+            <div class="transport-secondary-group">
+              <button type="button" id="tape-warmth-btn" class="deck-btn deck-btn--pill" title="Activar sonido cálido de casete">
+                ✦ Calidez de cinta
+              </button>
+              <div class="volume-control" title="Volumen">
+                <span style="font-size:0.82rem;">♪</span>
+                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.02" value="0.85" aria-label="Volumen" />
+              </div>
+            </div>
+
+            <div class="transport-main-group">
+              <button type="button" id="prev-btn" class="deck-btn deck-btn--round" aria-label="Canción anterior" title="Canción anterior">
+                ⏮
+              </button>
+              <button type="button" id="play-pause-btn" class="deck-btn deck-btn--play" aria-label="Reproducir o pausar" title="Reproducir / Pausar">
+                <span id="play-pause-icon" style="font-size:1.35rem; margin-left:2px;">▶</span>
+              </button>
+              <button type="button" id="next-btn" class="deck-btn deck-btn--round" aria-label="Canción siguiente" title="Canción siguiente">
+                ⏭
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="lace-divider" aria-hidden="true">
+      <span class="lace-divider__bow">✿ 🎀 ✿</span>
+    </div>
+
+    <!-- ===================================================================
+         3. LISTA DE REPRODUCCIÓN (TRACKLIST INTERACTIVO)
+         =================================================================== -->
+    <section id="tracklist-section">
+      <div class="section-heading-wrap">
+        <span class="section-eyebrow">Elegidas con todo mi amor</span>
+        <h2 class="section-title">Lista de canciones</h2>
+      </div>
+
+      <div class="jcard-tracklist">
+        <div class="jcard-header gingham-strip">
+          <div class="jcard-header__left">
+            <span class="jcard-side-tag">LADO A</span>
+            <span class="jcard-header__title">Nuestras canciones especiales (5 temas)</span>
+          </div>
+        </div>
+
+        <ul id="track-list" class="track-list" aria-label="Lista de canciones">
+          <!-- Se llena dinámicamente con app.js -->
+        </ul>
+      </div>
+    </section>
+
+    <div class="lace-divider" aria-hidden="true">
+      <span class="lace-divider__bow">✦ ♡ ✦</span>
+    </div>
+
+    <!-- ===================================================================
+         4. NOTA PERSONALIZADA (CARTA ESTILO PAPELERÍA VINTAGE)
+         =================================================================== -->
+    <section id="liner-note-section">
+      <div class="section-heading-wrap">
+        <span class="section-eyebrow">Guardada dentro de la cajita</span>
+        <h2 class="section-title">Una carta para ti</h2>
+      </div>
+
+      <div class="liner-note-wrapper">
+        <div class="washi-tape gingham-strip" aria-hidden="true"></div>
+
+        <article class="liner-note-paper">
+          <div class="liner-note-meta">
+            <span>Inserto de casete • No. 01</span>
+            <span id="liner-date-stamp">Para mi persona favorita ♡</span>
+          </div>
+
+          <h3 class="liner-note-greeting" id="liner-greeting">
+            Hola, te hice una cinta...
+          </h3>
+
+          <div class="liner-note-body" id="liner-body">
+            <p>
+              Desde el día que te conocí no tuve dudas de que conoci a mi mejor amiga y más adelante dios me dio la bendición de amarte y créeme que pase lo que pase es lo mejor que me haya pasado, eres lo más importante de mi vida gracias por estos 4 meses donde somos todo y es un pequeño detalle que espero aprecies y te guste. Te amo 3 millones
+            </p>
+          </div>
+
+          <div class="liner-note-footer">
+            <div class="liner-signature-block">
+              <p class="liner-signoff">Siempre tuyo,</p>
+              <p class="liner-signature" id="liner-sender-sig">Jose ♡</p>
+            </div>
+
+            <div id="ps-secret-card" class="ps-secret-card" role="button" tabindex="0" aria-expanded="false">
+              <div class="ps-secret-label">
+                <span>✉</span>
+                <span>P.D. Toca para leer la nota secreta</span>
+              </div>
+              <p class="ps-secret-content" id="liner-ps-text">
+                Guárdame un baile para la próxima vez que nos veamos. No olvides escuchar tu nota de voz y descubrir tus flores abajo. ♡
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="lace-divider" aria-hidden="true">
+      <span class="lace-divider__bow">✿ 🎀 ✿</span>
+    </div>
+
+    <!-- ===================================================================
+         5. SECCIÓN DE SORPRESAS ADICIONALES
+            (Nota de Audio + Contador en tiempo real + Ramo "Tu ramo")
+         =================================================================== -->
+    <section id="surprises-section">
+      <div class="section-heading-wrap">
+        <span class="section-eyebrow">Detalles guardados en tu sobre</span>
+        <h2 class="section-title">Pequeñas sorpresas para ti</h2>
+      </div>
+
+      <div class="surprises-grid">
+        <!-- Columna izquierda: Nota de voz + Contador en tiempo real -->
+        <div class="surprises-left-col">
+
+          <!-- Sorpresa 01: Nota de voz -->
+          <div class="surprise-card">
+            <span class="surprise-tag">🎙 Sorpresa 01 • Mensaje de voz de Jose</span>
+            <h3 class="surprise-card__title">Una nota de voz para ti</h3>
+            <p class="surprise-card__desc">
+              Grabada con todo mi corazón para que escuches lo mucho que significas para mí.
+            </p>
+
+            <div id="voice-memo-box" class="voice-memo-box">
+              <div class="voice-memo-controls">
+                <button type="button" id="voice-play-btn" class="voice-play-btn" aria-label="Reproducir nota de voz">
+                  <span id="voice-play-icon">▶</span>
+                </button>
+                <div id="voice-waveform" class="voice-waveform" aria-label="Barra de avance de audio">
+                  <!-- 34 barras generadas por JS -->
+                </div>
+                <span id="voice-time" class="voice-time">0:00 / 1:32</span>
+              </div>
+
+              <div id="voice-transcript" class="voice-transcript" aria-live="polite">
+                <span class="voice-phrase" data-start="0" data-end="4">“Las palabras faltan cuando hablo de hacerte saber que te amo.</span>
+                <span class="voice-phrase" data-start="4" data-end="14">Desde aquel día que nos dimos el primer beso me abriste los ojos de tal manera que me di cuenta que te amaba desde muchísimo más antes.</span>
+                <span class="voice-phrase" data-start="14" data-end="20">Desde que me hacías reír, desde que estuviste para mí en aquellos momentos cuando nadie estaba para mí,</span>
+                <span class="voice-phrase" data-start="20" data-end="27">y me di cuenta que realmente te amo de tal forma que no sabría describir mucho de lo que siento.</span>
+                <span class="voice-phrase" data-start="27" data-end="34">Este, créeme que desde ese momento me juré jamás hacerte daño ni hacerte sentir algo que te pueda lastimar.</span>
+                <span class="voice-phrase" data-start="34" data-end="44">Y créeme que siempre pienso más en qué hacer y qué te puede gustar o qué te puede incomodar, o si voy muy rápido, o si soy muy intenso, o si te empalago,</span>
+                <span class="voice-phrase" data-start="44" data-end="51">pero créeme que todas esas acciones de amor que hago es porque realmente no puedo guardar todo el amor que te siento.</span>
+                <span class="voice-phrase" data-start="51" data-end="63">Y pues ¿qué te puedo decir? Te amo de tal forma que el ‘te amo’ es la forma más mínima que puedo expresar de todo lo que siento hacia ti, ¿sabes?</span>
+                <span class="voice-phrase" data-start="63" data-end="70">Y es que me faltan palabras para decir y agradecer todo lo que haces por mí, te amo con todo mi ser.</span>
+                <span class="voice-phrase" data-start="70" data-end="81">Y creo que estos 4 meses me hicieron reflexionar muchas cosas y me di cuenta que me hacías falta toda la vida, y me has hecho falta toda la vida,</span>
+                <span class="voice-phrase" data-start="81" data-end="86">y quiero que estés en mi vida hasta que tú me des el chance de estar ahí.</span>
+                <span class="voice-phrase" data-start="86" data-end="93">Te amo mucho y creo que espero y creo que este pequeño detalle te va a gustar.” ♡</span>
+              </div>
+
+              <div class="voice-extra-actions">
+                <span style="font-family:var(--font-sans); font-size:0.75rem; color:var(--ink-muted);">
+                  ✦ Toca cualquier frase o la barra de ondas para avanzar el audio
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sorpresa 02: Contador en tiempo real: Amor (24 de julio 2026) y Amistad (2022) -->
+          <div class="surprise-card love-counter-card">
+            <span class="surprise-tag">⏳ Sorpresa 02 • Nuestro tiempo juntos</span>
+            <h3 class="surprise-card__title">Contando cada segundo a tu lado</h3>
+            <p class="surprise-card__desc">
+              Cada instante contigo ha sido el mejor regalo de mi vida.
+            </p>
+
+            <div class="counter-block counter-block--primary">
+              <span class="counter-block-badge">♡ Nuestro Amor (4 meses · 24 de julio de 2026) ♡</span>
+              <div class="counter-display" id="love-counter" aria-live="polite">
+                <div class="counter-unit">
+                  <span class="counter-number" id="count-days">0</span>
+                  <span class="counter-label">Días</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                  <span class="counter-number" id="count-hours">00</span>
+                  <span class="counter-label">Horas</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                  <span class="counter-number" id="count-minutes">00</span>
+                  <span class="counter-label">Minutos</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                  <span class="counter-number" id="count-seconds">00</span>
+                  <span class="counter-label">Segundos</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pequeño contador de Amistad desde 2022 -->
+            <div class="friend-counter-box">
+              <div class="friend-counter-header">
+                <span class="friend-counter-icon">🤝 ♡</span>
+                <span class="friend-counter-title">Nuestra Amistad • Desde 2022</span>
+              </div>
+              <div class="friend-counter-display" id="friend-counter" aria-live="polite">
+                <div class="friend-unit">
+                  <span class="friend-number" id="count-friend-days">0</span>
+                  <span class="friend-label">días</span>
+                </div>
+                <span class="friend-sep">•</span>
+                <div class="friend-unit">
+                  <span class="friend-number" id="count-friend-hours">00</span>
+                  <span class="friend-label">horas</span>
+                </div>
+                <span class="friend-sep">•</span>
+                <div class="friend-unit">
+                  <span class="friend-number" id="count-friend-minutes">00</span>
+                  <span class="friend-label">min</span>
+                </div>
+                <span class="friend-sep">•</span>
+                <div class="friend-unit">
+                  <span class="friend-number" id="count-friend-seconds">00</span>
+                  <span class="friend-label">seg</span>
+                </div>
+              </div>
+              <p class="friend-counter-caption">«Desde el día que te conocí supe que eras mi mejor amiga»</p>
+            </div>
+
+            <p class="counter-footquote">
+              “Y esto apenas es el comienzo de nuestra historia ♡”
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Columna derecha: Ramo de flores virtual ("Tu ramo") -->
+        <div class="surprise-card bouquet-card">
+          <span class="surprise-tag">✿ Sorpresa 03 • Flores eternas</span>
+          <h3 class="surprise-card__title">Tu ramo de flores</h3>
+          <p class="surprise-card__desc">
+            Flores que nunca se marchitan — toca cada flor del ramo para leer lo que siento por ti.
+          </p>
+
+          <div class="bouquet-stage" id="bouquet-stage">
+            <img src="assets/bouquet.jpg" alt="Ramo de acuarela con peonías rosas, rosas, ranúnculos y lazo de satén" class="bouquet-img" />
+
+            <!-- Pines interactivos posicionados sobre cada flor -->
+            <button type="button" class="flower-pin is-selected" style="left: 35%; top: 31%;" data-flower="0" aria-label="Flor 1">1</button>
+            <button type="button" class="flower-pin" style="left: 40%; top: 47%;" data-flower="1" aria-label="Flor 2">2</button>
+            <button type="button" class="flower-pin" style="left: 54%; top: 36%;" data-flower="2" aria-label="Flor 3">3</button>
+            <button type="button" class="flower-pin" style="left: 27%; top: 23%;" data-flower="3" aria-label="Flor 4">4</button>
+            <button type="button" class="flower-pin" style="left: 50%; top: 69%;" data-flower="4" aria-label="Flor 5">5</button>
+          </div>
+
+          <div id="flower-pills-row" class="flower-pills-row">
+            <!-- Se llena con JS -->
+          </div>
+
+          <div class="flower-meaning-card" id="flower-meaning-card" aria-live="polite">
+            <div class="flower-meaning-name" id="flower-meaning-name">Flor 01 • Peonía rosa</div>
+            <p class="flower-meaning-text" id="flower-meaning-text">Eres el papoi de mi papoi</p>
+          </div>
+
+          <button type="button" id="petal-shower-btn" class="petal-shower-btn">
+            ✿ Lluvia de pétalos de rosa ✿
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PIE DE PÁGINA
+         =================================================================== -->
+    <footer class="gift-footer">
+      <p class="gift-footer__quote">“Hecho a mano, sellado con lacre de rosa y pensado únicamente para ti.”</p>
+      <div class="gift-footer__actions">
+        <button type="button" id="footer-petal-btn" class="footer-link-btn">
+          ✿ Lanzar pétalos
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="audio-engine.js?v=5"></script>
+  <script src="app.js?v=5"></script>
+</body>
+</html>
